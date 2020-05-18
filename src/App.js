@@ -23,8 +23,7 @@ class BooksApp extends React.Component {
         .then((books) => {
             let shelves = {};
             books.forEach(book => {
-                if (!(book.shelf in shelves) && (shelves[book.shelf] = []));
-                shelves[book.shelf].push(book);
+                if (!(book.shelf in shelves) && (shelves[book.shelf].push(book)));
             })
             this.setState({
                 books: books,
