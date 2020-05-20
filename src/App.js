@@ -12,39 +12,39 @@ class BooksApp extends React.Component {
          * pages, as well as provide a good URL they can bookmark and share.
          */
         showSearchPage: false,
-        books: [],
-        shelves: {
-            currentlyReading:[],
-            wantToRead:[], 
-            read:[]}
+        books: []
     }
     componentDidMount() {
         BooksAPI.getAll()
         .then((books) => {
-            let shelves = {};
-            books.forEach(book => {
-                if (!(book.shelf in shelves) && (shelves[book.shelf].push(book)));
-            })
-            this.setState({
-                books: books,
-                shelves: shelves
+           this.setState({
+                books: books
             });
         })
     }
     render() {
+        const shelves = {
+            currentlyReading:[],
+            wantToRead:[], 
+            read:[]};
+        
+        if ((this.state.books.length > 0) && 
+            (this.state.books.forEach(book => 
+                {if ((book.shelf in shelves) && (shelves[book.shelf].push(book)));})));
+
         return (
             <div>
                 <BookShelf
                     shelfName='Currently Reading'
-                    books={this.state.shelves.currentlyReading}
+                    books={shelves.currentlyReading}
                 />
                 <BookShelf
                     shelfName='Want to Read'
-                    books={this.state.shelves.wantToRead}
+                    books={shelves.wantToRead}
                 />
                 <BookShelf
                     shelfName='Currently Reading'
-                    books={this.state.shelves.read}
+                    books={shelves.read}
                 />
             </div>
         )
