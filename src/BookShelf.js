@@ -16,7 +16,7 @@ const BookShelf = props => {
 
     const { shelfName, books, handleShelfChange } = props;
 
-    const bookCards = ( typeof books != 'undefined' && books instanceof Array)? books.map(book => (
+    const bookCards = ( typeof books != 'undefined' && books instanceof Array && books.length > 0)? books.map(book => (
                                                 <BookCard
                                                     key={book.id}
                                                     bookInfo={book}
