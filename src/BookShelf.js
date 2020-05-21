@@ -14,12 +14,13 @@ const BookShelf = props => {
     off of the pros passed into this presentational component.
     */
 
-    const { shelfName, books } = props;
+    const { shelfName, books, handleShelfChange } = props;
 
     const bookCards = ( typeof books != 'undefined' && books instanceof Array)? books.map(book => (
                                                 <BookCard
                                                     key={book.id}
                                                     bookInfo={book}
+                                                    handleShelfChange={handleShelfChange}
                                                 />
                                             )) 
                                             : null;

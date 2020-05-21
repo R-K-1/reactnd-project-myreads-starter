@@ -1,5 +1,4 @@
 import React from 'react';
-
 /*
 Since this component doesn't need to hold state, we can make it a Stateless
 Functional Component.
@@ -9,7 +8,8 @@ const BookCard = props => {
     Destructuring via ES6. We're getting the book properties
     off of the pros passed into this presentational component. 
     */
-    const { bookInfo } = props;
+    const { bookInfo, handleShelfChange } = props;
+    
     return (
 
         <li key={bookInfo.id}>
@@ -17,7 +17,9 @@ const BookCard = props => {
                 <div className="book-top">
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${bookInfo.imageLinks.smallThumbnail})` }}></div>
                     <div className="book-shelf-changer">
-                        <select>
+                        <select 
+                            onChange= {(event) => handleShelfChange(`${bookInfo.id}|${bookInfo.shelf}|${event.target.value}`)}
+                            value={bookInfo.shelf}>
                             <option value="move" disabled>Move to...</option>
                             <option value="currentlyReading">Currently Reading</option>
                             <option value="wantToRead">Want to Read</option>
